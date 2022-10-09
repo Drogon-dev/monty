@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	data.fp = fopen(data.filename, "r");
 	if (!data.fp)
 		get_error(2);
-	
+
 	while ((line_read = getline(&data.line, &len, data.fp)) > 0)
 	{
 		if (*data.line == '\n')
