@@ -18,4 +18,10 @@ File | Description
 ---- | -----------
 [main.c](./main.c) | entry point of the program
 [monty.h](./monty.h) | main header file
+[get_tokens.c](./get_tokens.c) | Splits user input into tokens
+[operations_handler.c](./operations_handler.c) | Handles finding and calling of required operations
+[operations.c](./operations.c) | contains all operation functions
+[error_handler.c](./error_handler.c) | Handles finding and calling the required error messages
+[memory_manager.c](./memory_managerr.c) | Handles memory management so as to avoid memory leak
+[mode_handler.c](./mode_handler.c) | Handles switching of mode from Stack (default) to Queues and vice versa
 [bf](./bf) | Advanced tasks: Brainf*ck programs
