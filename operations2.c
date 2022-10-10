@@ -15,7 +15,7 @@ void add_top2_op(stack_t **stack,
 
 	if (!temp2 || !(temp2)->next)
 		get_error(9);
-	
+
 	(temp2)->next->n += (temp2)->n;
 	pop_op(stack, data.line_number);
 }
@@ -30,12 +30,13 @@ void nop_op(__attribute__((unused)) stack_t **stack,
 {}
 
 /**
- * sub_top2_op - subtracts the top element of the stack 
+ * sub_top2_op - subtracts the top element of the stack
  * from the second top element of the stack.
  * @stack: double pointer to the first node
  * @line_number: line number
  */
-void sub_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void sub_top2_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
 	stack_t *temp2 = *stack;
 

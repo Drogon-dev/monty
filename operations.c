@@ -9,8 +9,8 @@ void push_op(stack_t **stack,
 		__attribute__((unused)) unsigned int line_number)
 {
 	stack_t *new_node;
-	new_node = malloc(sizeof(stack_t));
 
+	new_node = malloc(sizeof(stack_t));
 	if (!new_node)
 		get_error(2);
 
@@ -96,7 +96,7 @@ void print_top_op(stack_t **stack,
  * @line_number: line number
  */
 void pop_op(stack_t **stack,
-	       	__attribute__((unused)) unsigned int line_number)
+		__attribute__((unused)) unsigned int line_number)
 {
 	stack_t *temp = *stack;
 
