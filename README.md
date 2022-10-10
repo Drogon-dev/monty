@@ -20,7 +20,10 @@ File | Description
 [monty.h](./monty.h) | main header file
 [get_tokens.c](./get_tokens.c) | Splits user input into tokens
 [operations_handler.c](./operations_handler.c) | Handles finding and calling of required operations
-[operations.c](./operations.c) | contains all operation functions
+[operations.c](./operations.c) | contains some operation functions
+[operations2.c](./operations2.c) | contains some operation functions
+[operations3.c](./operations3.c) | contains some operation functions
+[helpers_func.c](./helpers_func.c) | contains some helping functions
 [error_handler.c](./error_handler.c) | Handles finding and calling the required error messages
 [memory_manager.c](./memory_managerr.c) | Handles memory management so as to avoid memory leak
 [mode_handler.c](./mode_handler.c) | Handles switching of mode from Stack (default) to Queues and vice versa
