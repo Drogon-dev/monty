@@ -123,3 +123,25 @@ void pop_op(stack_t **stack,
 		head_q = temp;
 	}
 }
+
+/**
+ * swap_top2_op - swaps the top two elements of the stack
+ * @stack: ddouble pointer to the first node
+ * @line_number: line number
+ */
+void swap_top2_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
+{
+	int temp1;
+	stack_t *temp2 = *stack;
+
+	if (!is_stack)
+		temp2 = head_q;
+
+	if (!temp2 || !(temp2)->next)
+		get_error(8);
+
+	temp1 = (temp2)->n;
+	(temp2)->n = (temp2)->next->n;
+	(temp2)->next->n = temp1;
+}
