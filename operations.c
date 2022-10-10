@@ -112,6 +112,8 @@ void pop_op(stack_t **stack,
 		temp = NULL;
 		if (!is_stack)
 			head_q = temp;
+		else
+			*stack = temp;
 	}
 	else
 	{
