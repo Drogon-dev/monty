@@ -28,47 +28,47 @@ int _isdigit(char *str)
  * @stack: double pointer to first node
  * @line_number: line number
  */
-void push_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void push_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    stack_t *new_node;
+	stack_t *new_node;
+	new_node = malloc(sizeof(stack_t));
 
-    new_node = malloc(sizeof(stack_t));
-    if (!new_node)
-        get_error(2);
+	if (!new_node)
+		get_error(2);
 
-    if (_isdigit(data.args[1]) > 0)
-        get_error(5);
+	if (_isdigit(data.args[1]) > 0)
+		get_error(5);
 
-    new_node->prev = NULL;
-    new_node->n = atoi(data.args[1]);
-    new_node->next = NULL;
+	new_node->prev = NULL;
+	new_node->n = atoi(data.args[1]);
+	new_node->next = NULL;
 
+	if (!*stack)
+	{
+		*stack = new_node;
+		if (is_stack)
+			bottom_s = *stack;
+		else
+			head_q = *stack;
+	}
+	else
+	{
+		if (is_stack)
+		{
+			new_node->next = *stack;
+			(*stack)->prev = new_node;
+		}
+		else
+		{
+			new_node->prev = *stack;
+			(*stack)->next = new_node;
+		}
+	}
 
-    if (!*stack)
-    {
-        *stack = new_node;
-        if (is_stack)
-            bottom_s = *stack;
-        else
-            head_q = *stack;
-    }
-    else
-    {
-        if (is_stack)
-        {
-            new_node->next = *stack;
-            (*stack)->prev = new_node;
-        }
-        else
-        {
-            new_node->prev = *stack;
-            (*stack)->next = new_node;
-        }
-    }
-
-    *stack = new_node;
-    new_node = NULL;
-    free(new_node);
+	*stack = new_node;
+	new_node = NULL;
+	free(new_node);
 }
 
 /**
@@ -76,18 +76,19 @@ void push_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
  * @stack: double poitner ot first node
  * @line_number: line number
  */
-void print_all_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void print_all_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    stack_t *temp = *stack;        
+	stack_t *temp = *stack;
 
-    if (!is_stack)
-        temp = head_q;
- 
-    while (temp)
-    {
-        printf("%u\n", temp->n);
-        temp = temp->next;
-    }
+	if (!is_stack)
+		temp = head_q;
+
+	while (temp)
+	{
+		printf("%u\n", temp->n);
+		temp = temp->next;
+	}
 }
 
 /**
@@ -95,21 +96,21 @@ void print_all_op(stack_t **stack, __attribute__((unused)) unsigned int line_num
  * @stack: double pointer to the first node
  * @line_number: line number
  */
-void print_top_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void print_top_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    if (is_stack)
-    {
-        if (!*stack)
-            get_error(6);
-        printf("%u\n", (*stack)->n);
-
-    }
-    else 
-    {
-        if (!head_q)
-            get_error(6);
-        printf("%u\n", (head_q)->n);  
-    }
+	if (is_stack)
+	{
+		if (!*stack)
+			get_error(6);
+		printf("%u\n", (*stack)->n);
+	}
+	else
+	{
+		if (!head_q)
+			get_error(6);
+		printf("%u\n", (head_q)->n);
+	}
 }
 
 /**
@@ -117,32 +118,33 @@ void print_top_op(stack_t **stack, __attribute__((unused)) unsigned int line_num
  * @stack: double pointer to first node
  * @line_number: line number
  */
-void pop_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void pop_op(stack_t **stack,
+	       	__attribute__((unused)) unsigned int line_number)
 {
-    stack_t *temp = *stack;
+	stack_t *temp = *stack;
 
-    if (!is_stack)
-        temp = head_q;
-    
-    if (!temp)
-        get_error(7);
-    
-    if (!(temp)->next)
-    {
-        free(temp);
-        temp = NULL;
-        if (!is_stack)
-            head_q = temp;
-    }
-    else
-    {
-        temp = (temp)->next;
-        free((temp)->prev);
-        (temp)->prev = NULL;
-        if (is_stack)
-            *stack = temp;
-        head_q = temp;
-    }
+	if (!is_stack)
+		temp = head_q;
+
+	if (!temp)
+		get_error(7);
+
+	if (!(temp)->next)
+	{
+		free(temp);
+		temp = NULL;
+		if (!is_stack)
+			head_q = temp;
+	}
+	else
+	{
+		temp = (temp)->next;
+		free((temp)->prev);
+		(temp)->prev = NULL;
+		if (is_stack)
+			*stack = temp;
+		head_q = temp;
+	}
 }
 
 /**
@@ -150,20 +152,21 @@ void pop_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
  * @stack: ddouble pointer to the first node
  * @line_number: line number
  */
-void swap_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void swap_top2_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    int temp1;
-    stack_t *temp2 = *stack;
+	int temp1;
+	stack_t *temp2 = *stack;
 
-    if (!is_stack)
-        temp2 = head_q;
+	if (!is_stack)
+		temp2 = head_q;
 
-    if (!temp2 || !(temp2)->next)
-        get_error(8);
+	if (!temp2 || !(temp2)->next)
+		get_error(8);
 
-    temp1 = (temp2)->n;
-    (temp2)->n = (temp2)->next->n;
-    (temp2)->next->n = temp1;
+	temp1 = (temp2)->n;
+	(temp2)->n = (temp2)->next->n;
+	(temp2)->next->n = temp1;
 }
 
 /**
@@ -171,18 +174,19 @@ void swap_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_num
  * @stack: double pointer to the first node
  * @line_number: line number
  */
-void add_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
-{ 
-    stack_t *temp2 = *stack;
+void add_top2_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
+{
+	stack_t *temp2 = *stack;
 
-    if (!is_stack)
-        temp2 = head_q;
-    
-    if (!temp2 || !(temp2)->next)
-        get_error(9);
+	if (!is_stack)
+		temp2 = head_q;
 
-    (temp2)->next->n += (temp2)->n;
-    pop_op(stack, data.line_number);
+	if (!temp2 || !(temp2)->next)
+		get_error(9);
+	
+	(temp2)->next->n += (temp2)->n;
+	pop_op(stack, data.line_number);
 }
 
 /**
@@ -191,7 +195,7 @@ void add_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_numb
  * @line_number: line number
  */
 void nop_op(__attribute__((unused)) stack_t **stack,
-__attribute__((unused)) unsigned int line_number)
+		__attribute__((unused)) unsigned int line_number)
 {}
 
 /**
@@ -202,16 +206,16 @@ __attribute__((unused)) unsigned int line_number)
  */
 void sub_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
-    stack_t *temp2 = *stack;
+	stack_t *temp2 = *stack;
 
-    if (!is_stack)
-        temp2 = head_q;
-    
-    if (!temp2 || !(temp2)->next)
-        get_error(10);
+	if (!is_stack)
+		temp2 = head_q;
 
-    (temp2)->next->n -= (temp2)->n;
-    pop_op(stack, data.line_number);
+	if (!temp2 || !(temp2)->next)
+		get_error(10);
+
+	(temp2)->next->n -= (temp2)->n;
+	pop_op(stack, data.line_number);
 }
 
 /**
@@ -220,21 +224,22 @@ void sub_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_numb
  * @stack: double pointer to the first node
  * @line_number: line number
  */
-void div_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void div_top2_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    stack_t *temp2 = *stack;
+	stack_t *temp2 = *stack;
 
-    if (!is_stack)
-        temp2 = head_q;
-    
-    if (!temp2 || !(temp2)->next)
-        get_error(11);
-    
-    if (temp2->n == 0)
-        get_error(12);
+	if (!is_stack)
+		temp2 = head_q;
 
-    (temp2)->next->n /= (temp2)->n;
-    pop_op(stack, data.line_number);
+	if (!temp2 || !(temp2)->next)
+		get_error(11);
+
+	if (temp2->n == 0)
+		get_error(12);
+
+	(temp2)->next->n /= (temp2)->n;
+	pop_op(stack, data.line_number);
 }
 
 /**
@@ -243,18 +248,19 @@ void div_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_numb
  * @stack: double pointer to the first node
  * @line_number: line number
  */
-void mul_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void mul_top2_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    stack_t *temp2 = *stack;
+	stack_t *temp2 = *stack;
 
-    if (!is_stack)
-        temp2 = head_q;
-    
-    if (!temp2 || !(temp2)->next)
-        get_error(13);
+	if (!is_stack)
+		temp2 = head_q;
 
-    (temp2)->next->n *= (temp2)->n;
-    pop_op(stack, data.line_number);
+	if (!temp2 || !(temp2)->next)
+		get_error(13);
+
+	(temp2)->next->n *= (temp2)->n;
+	pop_op(stack, data.line_number);
 }
 
 /**
@@ -263,21 +269,22 @@ void mul_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_numb
  * @stack: double pointer to the first node
  * @line_number: line number
  */
-void mod_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void mod_top2_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-        stack_t *temp2 = *stack;
+	stack_t *temp2 = *stack;
 
-    if (!is_stack)
-        temp2 = head_q;
-    
-    if (!temp2 || !(temp2)->next)
-        get_error(14);
+	if (!is_stack)
+		temp2 = head_q;
 
-    if ((*stack)->n == 0)
-        get_error(15);
+	if (!temp2 || !(temp2)->next)
+		get_error(14);
 
-    (temp2)->next->n %= (temp2)->n;
-    pop_op(stack, data.line_number);
+	if ((*stack)->n == 0)
+		get_error(15);
+
+	(temp2)->next->n %= (temp2)->n;
+	pop_op(stack, data.line_number);
 }
 
 /**
@@ -286,21 +293,22 @@ void mod_top2_op(stack_t **stack, __attribute__((unused)) unsigned int line_numb
  * @stack: double pointer to the first node
  * @line_number: line number
  */
-void pchar_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void pchar_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    stack_t *temp = *stack;
-    
-    if (!is_stack)
-        temp = head_q;
+	stack_t *temp = *stack;
 
-    if (!temp)
-        get_error(15);
+	if (!is_stack)
+		temp = head_q;
 
-    if (temp->n < 0 || temp->n > 127)
-        get_error(16);
-    
-    putchar(temp->n);
-    putchar('\n');
+	if (!temp)
+		get_error(15);
+
+	if (temp->n < 0 || temp->n > 127)
+		get_error(16);
+
+	putchar(temp->n);
+	putchar('\n');
 }
 
 /**
@@ -309,26 +317,28 @@ void pchar_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
  * @stack: double pointer to the first node
  * @line_number: line number
  */
-void pstr_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void pstr_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    stack_t *temp = *stack;
-    
-    if (!is_stack)
-        temp = head_q;
+	stack_t *temp = *stack;
 
-    if (!temp)
-        putchar('\n');
+	if (!is_stack)
+		temp = head_q;
 
-    while (temp)
-    {
-        if (temp->n > 127 || temp->n < 0)
-            break;
-        if (temp->n == 0)
-            break;
-        putchar(temp->n);
-        temp = temp->next;
-    }
-    putchar('\n');
+	if (!temp)
+		putchar('\n');
+
+	while (temp)
+	{
+		if (temp->n > 127 || temp->n < 0)
+			break;
+		if (temp->n == 0)
+			break;
+
+		putchar(temp->n);
+		temp = temp->next;
+	}
+	putchar('\n');
 }
 
 /**
@@ -336,24 +346,25 @@ void pstr_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
  * @stack: double pointer to the first node
  * @line_number: line number;
  */
-void rotl_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void rotl_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    stack_t *temp = *stack;
-    int temp_val;
+	stack_t *temp = *stack;
+	int temp_val;
 
-    if (!is_stack)
-        temp = head_q;
+	if (!is_stack)
+		temp = head_q;
 
-    if (temp)
-    {
-        temp_val = (temp)->n;
-        while(temp->next)
-        {
-            temp->n = temp->next->n;
-            temp = temp->next;
-        }
-        temp->n = temp_val;
-    } 
+	if (temp)
+	{
+		temp_val = (temp)->n;
+		while (temp->next)
+		{
+			temp->n = temp->next->n;
+			temp = temp->next;
+		}
+		temp->n = temp_val;
+	}
 }
 
 /**
@@ -361,27 +372,28 @@ void rotl_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
  * @stack: double pointer to the first node
  * @line_number: line number;
  */
-void rotr_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void rotr_op(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    stack_t *temp = *stack, *temp2 = *stack;
-    int current_val, next_val;
+	stack_t *temp = *stack, *temp2 = *stack;
+	int current_val, next_val;
 
-    if (!is_stack)
-    {
-        temp = head_q;
-        temp2 = head_q;
-    }
+	if (!is_stack)
+	{
+		temp = head_q;
+		temp2 = head_q;
+	}
 
-    if (temp)
-    {
-        next_val = (temp)->n;
-        while(temp->next)
-        {
-            current_val = next_val;
-            next_val = temp->next->n;
-            temp->next->n = current_val;
-            temp = temp->next;
-        }
-        (temp2)->n = next_val;
-    }
+	if (temp)
+	{
+		next_val = (temp)->n;
+		while (temp->next)
+		{
+			current_val = next_val;
+			next_val = temp->next->n;
+			temp->next->n = current_val;
+			temp = temp->next;
+		}
+		(temp2)->n = next_val;
+	}
 }
