@@ -80,7 +80,7 @@ void free_data(void)
 void free_stack(stack_t *stack)
 {
 	stack_t *temp1, *temp2 = stack;
-	
+
 	if (!is_stack)
 		temp2 = head_q;
 

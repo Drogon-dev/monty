@@ -19,7 +19,7 @@
 #define PCHAR_RANGE "L%u: can't pchar, value out of range\n"
 
 /**
- * error_set_one: error messages for set one
+ * error_set_one - error messages for set one
  * @error_code: error code
  */
 void error_set_one(int error_code)
@@ -53,13 +53,13 @@ void error_set_one(int error_code)
 		default:
 			break;
 	}
-	
+
 	if (error_code != 1 && error_code != 2)
 		free_data();
 }
 
 /**
- * error_set_two: errors messages for set two
+ * error_set_two - errors messages for set two
  * @error_code: error code
  */
 void error_set_two(int error_code)

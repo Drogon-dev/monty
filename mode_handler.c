@@ -6,14 +6,15 @@
  * mode
  * @line_number: line number
  */
-void stack_mode(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void stack_mode(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    if (!is_stack)
-    {
-        bottom_s = *stack;
-        *stack = head_q;
-        is_stack = 1;
-    }
+	if (!is_stack)
+	{
+		bottom_s = *stack;
+		*stack = head_q;
+		is_stack = 1;
+	}
 }
 
 /**
@@ -22,12 +23,13 @@ void stack_mode(stack_t **stack, __attribute__((unused)) unsigned int line_numbe
  * mode
  * @line_number: line number
  */
-void queue_mode(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void queue_mode(stack_t **stack,
+		__attribute__((unused)) unsigned int line_number)
 {
-    if (is_stack)
-    {
-        head_q = *stack;
-        *stack = bottom_s;
-        is_stack = 0;
-    }
+	if (is_stack)
+	{
+		head_q = *stack;
+		*stack = bottom_s;
+		is_stack = 0;
+	}
 }
