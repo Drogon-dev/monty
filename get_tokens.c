@@ -29,7 +29,7 @@ int get_tokens(void)
 				get_error(2);
 			size = new_size;
 		}
-		token = strtok(NULL, DELIMITER)
+		token = strtok(NULL, DELIMITER);
 	}
 
 	data.args[count] = NULL;
